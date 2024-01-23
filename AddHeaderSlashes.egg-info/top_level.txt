@@ -1,3 +1,0 @@
-addHeaderSlashes
-dist
-file_handling_package

@@ -11,7 +11,6 @@ Imports:
 import os
 import tempfile
 import atexit
-import re
 import commentjson
 from addHeaderSlashes.pyhelpers.pytools import clear_history_folder
 import tkinter as tk
