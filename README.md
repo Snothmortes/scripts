@@ -1,3 +1,10 @@
+<h1>Table of contents</h1>
+
+- [Add Header Slashes](#add-header-slashes)
+  - [Features](#features)
+  - [Installation](#installation)
+  - [Usage/Examples](#usageexamples)
+  - [Dev. Progress](#dev-progress)
 
 # Add Header Slashes
 Fills in my section headers ASCII art with slashes
@@ -13,18 +20,16 @@ Fills in my section headers ASCII art with slashes
 Install my-project with python
 
 ```bash
-  python -m build
-  python -m pip install .
+  python.exe -m build
+  cd "./.venv/Scripts/"
+  "./activate"
+  python.exe -m pip install .
 ```
     
 ## Usage/Examples
 
-```javascript
-import Component from 'my-project'
-
-function App() {
-  return <Component />
-}
+```bash
+  python.exe -m AddHeaderShashes
 ```
 
 ## Dev. Progress

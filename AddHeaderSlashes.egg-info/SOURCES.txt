@@ -1,0 +1,13 @@
+README.md
+pyproject.toml
+AddHeaderSlashes.egg-info/PKG-INFO
+AddHeaderSlashes.egg-info/SOURCES.txt
+AddHeaderSlashes.egg-info/dependency_links.txt
+AddHeaderSlashes.egg-info/top_level.txt
+lib/__init__.py
+lib/pyhelpers/__init__.py
+lib/pyhelpers/pytools.py
+lib/utils/__init__.py
+lib/utils/filetools.py
+lib/utils_tests/__init__.py
+lib/utils_tests/filetools_test.py

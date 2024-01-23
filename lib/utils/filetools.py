@@ -12,11 +12,12 @@ import os
 import tempfile
 import atexit
 import commentjson
-from addHeaderSlashes.pyhelpers.pytools import clear_history_folder
 import tkinter as tk
 from tkinter import filedialog, messagebox
 
-JSON_PATH = 'C:/Users/glenj/AppData/Roaming/Code/User'
+from lib.pyhelpers.pytools import clear_history_folder
+
+JSON_PATH = 'C:\\Users\\glenj\\OneDrive\\Codebase\\ByLanguage\\Python\\AddHeaderSlashes\\res'
 
 JSON_EMPTY_ERROR = "Empty file. No modification."
 JSON_INVALID_ERROR = "Error: Invalid JSON content in the file:"
