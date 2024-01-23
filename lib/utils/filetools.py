@@ -1,8 +1,9 @@
 """
 Imports:
     - os:           For file path manipulations and file operations.
-    - re:           For regular expression matching and text pattern manipulation.
-    - json:         For parsing and processing JSON content if applicable.
+    - tempfile:     For temporary file generation
+    - atexit:       For file cleanup
+    - commentjson:  For parsing and processing JSON content if applicable.
     - tkinter:      For creating a graphical user interface (GUI) for file browsing 
                     and user interaction.
     - filedialog:   For system-specific parameters and functions.
