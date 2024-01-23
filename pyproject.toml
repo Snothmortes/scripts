@@ -1,0 +1,25 @@
+[project]
+name = "AddHeaderSlashes"
+version = "1.0.0"
+authors = [{ name = "Snothmortes", email = "snothmortes@gmail.com" }]
+description = "Fills in my section headers ASCII art with slashes"
+readme = "README.md"
+
+[tool.poetry]
+name = "AddHeaderSlashes"
+version = "1.0.0"
+authors = ["Snothmortes <snothmortes@gmail.com>"]
+description = "Fills in my section headers ASCII art with slashes"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+commentjson = "^0.8.5"
+requires-python = ">=3.11"
+
+python = "^3.8"
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages]
+find = {}
