@@ -1,12 +1,9 @@
-import platform
-import subprocess
 import unittest
 from unittest.mock import patch
-from scripts.addHeaderSlashes.utils.filetools import \
+from lib.utils.filetools import \
     browse_for_json_file,                            \
     verify_json,                                       \
     read_json_by_lines,                              \
-    match_comment,                                   \
     modify_line,                                     \
     open_temp_file                                   \
 
@@ -43,16 +40,6 @@ class TestReadFileByLines(unittest.TestCase):
     def test_read_nonexistent_file(self):
         lines = read_json_by_lines("nonexistent_file.txt")
         self.assertIsNone(lines)
-
-
-class TestMatchCommentLine(unittest.TestCase):
-    def test_match_comment_line(self):
-        line = "  // This is a comment."
-        self.assertTrue(match_comment(line))
-
-    def test_non_match_comment_line(self):
-        line = "This is not a comment."
-        self.assertFalse(match_comment(line))
 
 
 class TestModifyCommentLine(unittest.TestCase):

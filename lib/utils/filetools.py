@@ -12,11 +12,13 @@ import os
 import tempfile
 import atexit
 import commentjson
-from addHeaderSlashes.pyhelpers.pytools import clear_history_folder
 import tkinter as tk
+
 from tkinter import filedialog, messagebox
 
-JSON_PATH = 'C:/Users/glenj/AppData/Roaming/Code/User'
+from lib.pyhelpers.pytools import clear_history_folder
+
+JSON_PATH = 'C:/Users/glenj/OneDrive/Codebase/ByLanguage/Python/AddHeaderSlashes/res'
 
 JSON_EMPTY_ERROR = "Empty file. No modification."
 JSON_INVALID_ERROR = "Error: Invalid JSON content in the file:"
@@ -106,18 +108,23 @@ def browse_for_json_file():
 
     if not json_file:
         print(JSON_SEL_ABORTED)
-        exit
+        os._exit(1)
 
 
 def verify_json():
     global temp_file, json_file
-    with open(json_file, 'r', encoding='utf-8') as file:
-        file_content = file.read()
-        try:
-            commentjson.loads(file_content)
-        except ValueError as e:
-            print(JSON_INVALID_ERROR, str(e))
-            exit
+    try:
+        with open(json_file, 'r', encoding='utf-8') as file:
+            file_content = file.read()
+            try:
+                commentjson.loads(file_content)
+            except ValueError as e:
+                print(JSON_INVALID_ERROR, str(e))
+                exit
+        pass
+    except Exception as e:
+        print(JSON_SEL_ABORTED)
+        os._exit(1)
 
 
 def read_json_by_lines():
