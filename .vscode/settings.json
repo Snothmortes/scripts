@@ -10,11 +10,20 @@
   "editor.rulers": [
     91
   ],
-  "[jsonc]": {
+  "[json][jsonc]": {
     "editor.rulers": [
       120,
     ],
   },
+  "files.associations": {
+    "*.json": "jsonc"
+  },
+  "json.schemas": [{
+    "fileMatch": ["*.json"],
+    "schema": {
+      "allowTrailingCommas": true,
+    },
+  }],
   "python.testing.unittestArgs": [
     "-v",
     "-s",
@@ -26,5 +35,5 @@
   "python.testing.unittestEnabled": false,
   "python.testing.pytestArgs": [
     "scripts"
-  ]
+  ],
 }

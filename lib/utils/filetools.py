@@ -52,8 +52,9 @@ def main():
     verify_json()
 
     lines = read_json_by_lines()
+    orig_lines = list.copy(lines)
 
-    for n, line in enumerate(lines):
+    for n, line in enumerate(orig_lines):
         # read until FULL BLOCK detected
         if not '\u2588' in line:
             max_length = 0
@@ -63,7 +64,7 @@ def main():
 
         # calculate max length of FULL BLOCK comment
         max_length = max(len(line)
-                         for line in lines[n:n+5]) \
+                         for line in orig_lines[n:n+5]) \
             if max_length == 0 else max_length
 
         print(f'n: {n}')
@@ -73,11 +74,12 @@ def main():
         print(f'max_length - len(line): {max_length - len(line)}\n')
 
         lines[n:n+5] = [
-            line[:4] + (116 - max_length) * '/' +
+            line[:4] + (116 - max_length) * '/' 
+            + 
             line[4:] + (max_length - len(line)) * '.'
             if '\u2588' in line
             else line
-            for line in lines[n:n+5]
+            for line in orig_lines[n:n+5]
         ]
 
         # modify_lines = [line +
@@ -100,6 +102,7 @@ def browse_for_json_file():
     root.withdraw()
     json_file = filedialog.askopenfilename(
         initialdir=JSON_PATH,
+        initialfile="settings.2.json",
         filetypes=[(
             "JSON files with comments",
             "*.json")
