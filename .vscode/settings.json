@@ -1,0 +1,30 @@
+{
+  "files.exclude": {
+    "globalStorage": true,
+    "History": true,
+    "snippets": true,
+    "workspaceStorage": true,
+    "*.json": false,
+    "**/Thumbs.db": true
+  },
+  "editor.rulers": [
+    91
+  ],
+  "[jsonc]": {
+    "editor.rulers": [
+      120,
+    ],
+  },
+  "python.testing.unittestArgs": [
+    "-v",
+    "-s",
+    "./scripts",
+    "-p",
+    "*_test.py"
+  ],
+  "python.testing.pytestEnabled": true,
+  "python.testing.unittestEnabled": false,
+  "python.testing.pytestArgs": [
+    "scripts"
+  ]
+}
