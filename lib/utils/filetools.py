@@ -10,6 +10,7 @@ Imports:
 """
 
 import os
+import re
 import tempfile
 import atexit
 import commentjson
@@ -41,10 +42,13 @@ def cleanup():
 
 
 def main():
-    os.system('cls')
     global temp_file, json_file
+
+    os.system('cls')
+
     temp_file = tempfile.NamedTemporaryFile(
         mode='w+t', delete=False, encoding='utf-8')
+
     atexit.register(cleanup)
 
     browse_for_json_file()
@@ -52,44 +56,36 @@ def main():
     verify_json()
 
     lines = read_json_by_lines()
-    orig_lines = list.copy(lines)
+    lines = [re.sub(r" +\n", "\n", line) for line in lines]
 
-    for n, line in enumerate(orig_lines):
-        # read until FULL BLOCK detected
-        if not '\u2588' in line:
+    for n, line in enumerate(lines):
+        if not '//' in line or re.search(r'\w+', line): # JSON line
             max_length = 0
             continue
-
-        lines[n:n+5] = [line.rstrip(' ') for line in lines[n:n+5]]
-
-        # calculate max length of FULL BLOCK comment
-        max_length = max(len(line)
-                         for line in orig_lines[n:n+5]) \
-            if max_length == 0 else max_length
-
-        print(f'n: {n}')
-        print(f'max_length: {max_length}')
-        print(f'len(line): {len(line)}')
-        print(f'116 - max_length: {116 - max_length}')
-        print(f'max_length - len(line): {max_length - len(line)}\n')
-
-        lines[n:n+5] = [
-            line[:4] + (116 - max_length) * '/' 
-            + 
-            line[4:] + (max_length - len(line)) * '.'
-            if '\u2588' in line
-            else line
-            for line in orig_lines[n:n+5]
-        ]
+        elif not '\u2588' in line: # FULL BLOCK comment border
+            lines[n] = "{}{}\n".format(
+                line[:4],
+                (120 - len(line)) * '/'
+            )
+        else: # FULL BLOCK comment line
+            max_length = max(len(line) for line in lines[n:n+5]) \
+                if max_length == 0 \
+                else max_length
+            lines[n] = "{}{}{}{}  //\n".format(
+                line[:4],
+                (120 - len(line) - (max_length - len(line)) - 4) * '/',
+                line[4:-1],
+                (max_length - len(line)) * ' '
+            )
 
         # modify_lines = [line +
         #                 (max_length - len(line) + 2) * ' ' + 2 * '/'
         #                 if '\u2588' in line else line for line in modify_lines]
 
-    for line in lines:
-        print(line[:-1])
-
     temp_file.seek(0)
+
+    with open('./res/settings.3.json', 'w', encoding='utf-8') as file:
+        file.writelines(lines)
 
     # open_temp_file(temp_file.name)
 
@@ -116,7 +112,7 @@ def browse_for_json_file():
 
 
 def verify_json():
-    global temp_file, json_file
+    global json_file
     try:
         with open(json_file, 'r', encoding='utf-8') as file:
             file_content = file.read()
@@ -127,12 +123,12 @@ def verify_json():
                 exit
         pass
     except Exception as e:
-        print(JSON_SEL_ABORTED)
+        print(JSON_SEL_ABORTED + ': ' + f'{e}.')
         os._exit(1)
 
 
 def read_json_by_lines():
-    global temp_file, json_file
+    global json_file
     with open(json_file, 'r', encoding='utf-8') as file:
         lines = file.readlines()
     return lines
@@ -143,11 +139,11 @@ def modify_line(line):
 
 
 def open_temp_file(file_path):
-    global temp_file, json_file
+    global json_file
     modal_window = tk.Tk()
     modal_window.title("Preview: " + str.split(json_file, '/')[-1])
 
-    with open(file_path, 'r', encoding='utf-8') as file:
+    with open(file_path, 'r', 'utf-8') as file:
         file_contents = file.read()
 
     text_widget = tk.Text(modal_window,
