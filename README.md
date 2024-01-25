@@ -21,8 +21,7 @@ Install my-project with python
 
 ```bash
   python.exe -m build
-  cd "./.venv/Scripts/"
-  "./activate"
+  . "./.venv/Scripts/activate"
   python.exe -m pip install .
 ```
     
